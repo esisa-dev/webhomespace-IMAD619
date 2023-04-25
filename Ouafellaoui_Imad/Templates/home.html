@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Home</title>
+</head>
+<body>
+    <div class="container">
+    <div class="lines">
+        <form action="{{ url_for('back') }}">
+            <button type="submit" style="margin: 5px 10px 15px 10px;"><i class="fa fa-search"></i> Back</button>
+        </form>
+        <form action="{{ url_for('download_home_dir') }}">
+            <button type="submit" style="margin: 5px 10px 15px 10px;"><i class="fa fa-search"></i> Télécharger</button>
+        </form>
+        <form action="{{ url_for('logout') }}" method="GET" >
+            <button type="submit" style="margin: 5px 10px 15px 10px;"><i class="fa fa-search"></i> Déconnexion</button>
+        </form>        
+    </div>
+        <div>
+            <form action="/Rechercher" method="GET">
+                <div style="display: flex;">
+                  <input type="text" placeholder="Recherche..." name="keyword" style="flex: 1;">
+                  <button type="submit" style="margin-left: 10px;"><i class="fa fa-search"></i> Submit</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="liness">
+            <div>
+                <label>Files</label>
+                <input type="text" value="{{ Files }}" readonly>
+            </div>
+            <div>
+                <label>Dirs</label>
+                <input type="text" value="{{ Dirs }}" readonly>
+            </div>
+            <div>
+                <label>Space</label>
+                <input type="text" value="{{ Space }}" readonly>
+            </div>
+        </div>
+
+        {% if db != [] %}
+        <div class="color">
+            <table class="data-grid">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Date</th>
+                        <th>Taille</th>
+                        <th>Permission</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in db %}
+                    <tr>
+                        <td><a href="{{ url_for('home', name=item.name) }}">{{ item.name }}</a></td>
+                        <td>{{ item.date }}</td>
+                        <td>{{ item.taille }}</td>
+                        <td>{{ item.permission }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+        <pre>{{ texte }}</pre>
+    </div>
+</body>
+</html>
