@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <title>Welcome to Home Space</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> 
+    </head>
+    <body class="body-style">
+        <center class="center-style">
+            <h1>Welcome to Home Space</h1>
+            <h3 class="form-title">Authentication</h3>
+            <div class="form-style">
+            <form action="/login" method="post" >
+                <label class="label-style">Username</label> <br>
+                <input type="text" name="username"/><br>
+                <label class="label-style">Password</label><br>
+                <input type="password" name="password"/>
+                <br><br>
+                <input type="submit" value="Authenticate"/>
+            </form>
+        </div>
+            <p class="error-message">{{error_auth}}</p>
+            <a href="/CreerUser" class="a-style">Create a user</a>
+        </center>
+    </body>
+</html>
